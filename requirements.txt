@@ -5,7 +5,6 @@ matplotlib==3.8.3
 seaborn==0.12.2
 scikit_learn==1.4.1.post1
 xgboost==1.5.0
-numpy==1.26.4
 pandas-profiling==3.2.0
 scikit-learn-intelex==2021.20220215.102710
 streamlit==1.32.2
