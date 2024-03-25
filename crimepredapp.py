@@ -1,8 +1,30 @@
+from base64 import b64encode
 import streamlit as st
 import pandas as pd
 import pickle
 from sklearn.preprocessing import LabelEncoder
-
+# Setting background image for web application
+def get_base64_of_binfile(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return b64encode(data).decode()
+ 
+ 
+def set_bg_page(png_file):
+    bin_str = get_base64_of_binfile(png_file)
+    page_bg_img = '''
+    <style>
+    .stApp {
+    background-image: url("data:image/png;base64,%s");
+    background-size: cover;
+    }
+    </style>
+    ''' % bin_str
+   
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+    return
+ 
+set_bg_page("citi1.png")
 label_encoder = LabelEncoder()
 
 # Load the label encoder
@@ -25,7 +47,7 @@ beats = {1: 'Beat 1', 2: 'Beat 2', 3: 'Beat 3'}  # Add more beats as needed
 years = {2012: 2012, 2013: 2013, 2014: 2014, 2015: 2015, 2016: 2016, 2017: 2017, 2018: 2018, 2019: 2019, 2020: 2020, 2021: 2021}
 
 # Dropdown widgets for each feature
-month = st.selectbox('Month', options=list(months.values()))
+month = st.selectbox('Month', options=list(months.values()),)
 season = st.selectbox('Season', options=list(seasons.values()))
 hour = st.selectbox('Hour', options=list(hours.values()))
 hour_category = st.selectbox('Hour Category', options=list(hour_categories.values()))
